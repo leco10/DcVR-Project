@@ -110,7 +110,7 @@ class VR(ShowBase):
         self.cardNP.setColor((0,0,0,0))
         
         # create environment in main window
-        self.floor = gltf._loader.load_model(r"E:\leos data\VR environments\pebbles.glb")
+        self.floor = gltf._loader.load_model(r"Assets\pebbles.glb")
         self.floor = NodePath(self.floor) #convert modelroot to nodepath
         self.floor.reparentTo(self.render)
         
@@ -132,7 +132,7 @@ class VR(ShowBase):
         self.subject.reparentTo(self.render)
         self.subject.setPos(0,0,self.starting_height)
         # create avatar
-        self.avatar = self.loader.load_model("/e/leos data/VR environments/Dc_animation_low_poly.egg")
+        self.avatar = self.loader.load_model("/Assets/Dc_animation_low_poly.egg")
         self.avatar = NodePath(self.avatar)
         self.avatar.setScale(2.2)
         self.avatar.setColor((1,0,0,0))
@@ -147,7 +147,7 @@ class VR(ShowBase):
         self.camLens.setNearFar(1/100,100)
         
         # create bowl in bowl window, adjust bowl camera and setup projector from subject position to bowl
-        self.bowl = gltf._loader.load_model(r"E:\leos data\VR environments\flat150_bowl.glb")
+        self.bowl = gltf._loader.load_model(r"Assets\flat150_bowl.glb")
         self.bowl = NodePath(self.bowl) #convert modelroot to nodepath
         self.bowl.reparentTo(self.bowl_render)
         # adjust camera
@@ -289,7 +289,7 @@ class VR(ShowBase):
         
         # get vigor and convert to velocity if above threshold
         print(end='\x1b[2K')
-        with open(r'C:\Users\jlab\Desktop\Leo\TailTracker\vigor_data.txt','r') as f:
+        with open(r'Estimator\vigor_data.txt','r') as f:
             str_input = f.readline()
             result = [val for val in str_input.split(',')]
    
@@ -361,14 +361,14 @@ class VR(ShowBase):
     def end_experiment(self):
         
         # save to file
-        path = os.path.join('E:\leos data\Exp08_2D_OMR',str(self.fish_id)).replace("\\","/")
-        os.mkdir(path) 
-        np.savetxt(os.path.join(path,'X_POS_' + str(self.fish_id) + '.txt').replace("\\","/"), self.X_POS,'%s')
-        np.savetxt(os.path.join(path,'Y_POS_' + str(self.fish_id) + '.txt').replace("\\","/"), self.Y_POS,'%s')
-        np.savetxt(os.path.join(path,'HEAD_' + str(self.fish_id) + '.txt').replace("\\","/"),  self.HEAD,'%s')
-        np.savetxt(os.path.join(path,'MISC' + str(self.fish_id) + '.txt').replace("\\","/"),  self.T,'%s',header='Meta data: \n' + 'Fish ID: ' + str(self.fish_id) + '\n' + 'Fish age (months): ' + self.fish_age + '\n' + 'Fish sex: '
-                   + self.fish_sex + '\n' + 'Fish length (cm): ' + self.fish_length + "\n" + 'alpha list: ' + str(self.alpha_list) + "\n"  + 'trials per angle: ' + str(self.trial_per_angle) + "\n" + 'trial starts: ' + str(self.trial_starts) + "\n" + "inter-trial starts: " + str(self.inter_trial_starts) +
-                   '\n' + 'Time: ')
+       # path = os.path.join('E:\leos data\Exp08_2D_OMR',str(self.fish_id)).replace("\\","/")
+       # os.mkdir(path) 
+       # np.savetxt(os.path.join(path,'X_POS_' + str(self.fish_id) + '.txt').replace("\\","/"), self.X_POS,'%s')
+       # np.savetxt(os.path.join(path,'Y_POS_' + str(self.fish_id) + '.txt').replace("\\","/"), self.Y_POS,'%s')
+       # np.savetxt(os.path.join(path,'HEAD_' + str(self.fish_id) + '.txt').replace("\\","/"),  self.HEAD,'%s')
+       # np.savetxt(os.path.join(path,'MISC' + str(self.fish_id) + '.txt').replace("\\","/"),  self.T,'%s',header='Meta data: \n' + 'Fish ID: ' + str(self.fish_id) + '\n' + 'Fish age (months): ' + self.fish_age + '\n' + 'Fish sex: '
+       #            + self.fish_sex + '\n' + 'Fish length (cm): ' + self.fish_length + "\n" + 'alpha list: ' + str(self.alpha_list) + "\n"  + 'trials per angle: ' + str(self.trial_per_angle) + "\n" + 'trial starts: ' + str(self.trial_starts) + "\n" + "inter-trial starts: " + str(self.inter_trial_starts) +
+        #           '\n' + 'Time: ')
 
         # terminate program and clean up
         VR_instance.destroy()
