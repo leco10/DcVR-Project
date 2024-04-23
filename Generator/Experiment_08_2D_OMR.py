@@ -41,7 +41,7 @@ class VR(ShowBase):
         input('Press Enter to start the experiment, make sure tail tracking is running!') 
         
         # parameters
-        self.habituation_duration = 120#600
+        self.habituation_duration = 120
         self.trial_duration = 40 # trial + intertrial
         self.trial_per_angle = 6
         self.alpha_list = []
@@ -53,10 +53,10 @@ class VR(ShowBase):
         self.max_inactive_trials = int((50*self.trial_number)/100)
         self.start = time.time()
         color = (0.05, 0.23, 0.85)
-        self.v_max = 8 # cm/s231216_1
+        self.v_max = 7 # cm/s
         self.av_max = 600
         self.conversion_factor = 0.8
-        self.drift_velocity = -1.5*self.conversion_factor
+        self.drift_velocity = -2*self.conversion_factor
         self.col_num = self.trial_duration*60 + 100 # 60 fps, +100 for saftey
         self.mold_height = 1.5#2.25
         self.projector_distance = -29
@@ -93,12 +93,12 @@ class VR(ShowBase):
         # window properties for new window
         wp = WindowProperties()
         wp.setSize(720,720)
-        wp.setOrigin(1920,0) #1920,0
+        wp.setOrigin(1920,0)
         
         # open new window for observing the bowl, set the gsg to main window to transfer textures
         self.bowl_win = self.openWindow(props=wp,gsg=self.win)
         # create render and camera
-        self.bowl_render = NodePath('render2')  # the string parameter is important
+        self.bowl_render = NodePath('render2') 
         self.bowl_cam = self.camList[1] # is the camera of self.bowl_win
         # make polygon with Cardmaker for fading
         self.card = CardMaker("fade card")
@@ -229,7 +229,7 @@ class VR(ShowBase):
                          
                     # check if it was an inactive trial and save data
                     if self.counter > 0:
-                       #self.check_exclusion()
+                       self.check_exclusion()
                    
                        # fill up position and heading arrays with 0s
                        self.trial_x_positions = self.trial_x_positions + [0]*(self.col_num-len(self.trial_x_positions))
